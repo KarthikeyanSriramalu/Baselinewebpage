@@ -1,0 +1,29 @@
+#TriggerEvent based on Branch
+on:
+ push:
+  branches:
+   - master
+
+# Jobs needs to part
+jobs:
+  setup-build-run-start
+    name: Pipleine
+    runs-on: ubuntu-latest
+
+    steps:
+    #Checkout
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+    #Build Docker:
+      - name: docker build
+        runs: |
+          docker build -t base:Testing .
+          docker images
+    #Docker login:
+      - name: docker login
+        runs: |
+          docker login --username=karthik21 --password=Dhivkk@#21 cloud.canister.io:5000
+    #Docker Push:
+      - name: docker Push
+        runs: 
+          docker push cloud.canister.io:5000/karthik21/base
