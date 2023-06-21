@@ -1,4 +1,3 @@
-#TriggerEvent based on Branch
 on:
  push:
   branches:
