@@ -6,8 +6,8 @@ on:
 
 # Jobs needs to part
 jobs:
-  setup-build-run-start
-    name: Pipleine
+  setup-build-run-start:
+    name: basewebpage
     runs-on: ubuntu-latest
 
     steps:
