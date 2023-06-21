@@ -15,14 +15,12 @@ jobs:
         uses: actions/checkout@v3
     #Build Docker:
       - name: docker build
-        runs: |
+        run: |
           docker build -t base:Testing .
           docker images
     #Docker login:
       - name: docker login
-        runs: |
-          docker login --username=karthik21 --password=Dhivkk@#21 cloud.canister.io:5000
+        run: docker login --username=karthik21 --password=Dhivkk@#21 cloud.canister.io:5000
     #Docker Push:
       - name: docker Push
-        runs: 
-          docker push cloud.canister.io:5000/karthik21/base
+        run: docker push cloud.canister.io:5000/karthik21/base
