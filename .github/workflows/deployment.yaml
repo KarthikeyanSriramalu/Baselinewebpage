@@ -23,4 +23,4 @@ jobs:
         run: docker login --username=karthik21 --password=Dhivkk@#21 cloud.canister.io:5000
     #Docker Push:
       - name: docker Push
-        run: docker pull cloud.canister.io:5000/karthik21/base\:Testing
+        run: docker push cloud.canister.io:5000/karthik21/base\:Testing
