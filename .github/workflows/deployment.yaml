@@ -16,11 +16,11 @@ jobs:
     #Build Docker:
       - name: docker build
         run: |
-          docker build -t cloud.canister.io:5000/karthik21/basetest:Testing .
+          docker build -t cloud.canister.io:5000/karthik21/base:Testing .
           docker images
     #Docker login:
       - name: docker login
         run: docker login --username=karthik21 --password=Dhivkk@#21 cloud.canister.io:5000
     #Docker Push:
       - name: docker Push
-        run: docker push cloud.canister.io:5000/karthik21/basetest:Testing
+        run: docker pull cloud.canister.io:5000/karthik21/base\:Testing
