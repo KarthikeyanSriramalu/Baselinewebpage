@@ -1,0 +1,9 @@
+---
+  #Playbook for Deployment
+  - name : deployment
+    hosts: all
+    become: true
+    tasks:
+      - name: Login Docker
+        command: docker login --username=karthik21 --password=Dhivkk@#21 cloud.canister.io:5000
+        
