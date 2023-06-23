@@ -1,0 +1,25 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: baselineweb-app
+  labels:
+    app: baselineweb-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: baselineweb-app
+  template:
+    metadata:
+      labels:
+        app: baselineweb-app
+    spec:
+      containers:
+      - name: baselineweb-app
+        imagePullPolicy: Alwayes
+        image: cloud.canister.io:5000/karthik21/base:Testing
+        ports:
+          - containerPort: 8080
+      # imagePullSecrets:
+      # - name: regcred
