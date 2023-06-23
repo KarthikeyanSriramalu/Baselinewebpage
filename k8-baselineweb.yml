@@ -20,6 +20,6 @@ spec:
         imagePullPolicy: Alwayes
         image: cloud.canister.io:5000/karthik21/base:Testing
         ports:
-          - containerPort: 8080
+          - containerPort: 80
       # imagePullSecrets:
       # - name: regcred
