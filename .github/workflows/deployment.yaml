@@ -28,6 +28,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: setup-build-run-start
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
       #Docker login:
       - name: docker login
         uses: ./
