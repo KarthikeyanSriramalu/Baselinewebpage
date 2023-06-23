@@ -30,5 +30,6 @@ jobs:
     steps:
       #Docker login:
       - name: docker login
-        run: docker login --username=karthik21 --password=Dhivkk@#21 cloud.canister.io:5000
+        run: ansible-playbook ansible-kubernates.yml -i ansible_hosts
+        
   
