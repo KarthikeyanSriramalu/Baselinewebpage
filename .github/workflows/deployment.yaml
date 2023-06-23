@@ -30,6 +30,7 @@ jobs:
     steps:
       #Docker login:
       - name: docker login
-        run: ls -la
+        run: ansible-playbook ./ansible-kubernates.yml -i ansible_hosts
+        
         
   
