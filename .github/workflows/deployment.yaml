@@ -45,6 +45,12 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: us-east-2
+      - name: deploy using EKS cluster
+        run: |
+          kubectl apply -f k8-baselineweb.yml
+          kubectl get svc
+          kubectl get pods
+
 
         
         
