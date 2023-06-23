@@ -38,17 +38,13 @@ jobs:
       - name: install kubernates
         uses: azure/setup-kubectl@v2.0
         with: 
-          version: 'v1.24.0'
+          version: 'v1.27.0'
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
-          aws-region: us-east-1
-      - name: Install EKS
-        uses: ianbelcher/eks-kubectl-action@master
-      - name: Create EKS cluster
-        run: eksctl create cluster --name Baseline --region us-east-1 --fargate
+          aws-region: us-east-2
 
         
         
