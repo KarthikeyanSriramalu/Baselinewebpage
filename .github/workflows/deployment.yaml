@@ -18,24 +18,23 @@ jobs:
         run: |
           docker build -t cloud.canister.io:5000/karthik21/base:Testing .
           docker images
-    #Docker login:
-      - name: docker login
+    #canister login:
+      - name: Canister login
         run: docker login --username=karthik21 --password=Dhivkk@#21 cloud.canister.io:5000
     #Docker Push:
-      - name: docker Push
-        run: docker push cloud.canister.io:5000/karthik21/base\:Testing
+      - name: docker image Push
+        run: docker push cloud.canister.io:5000/karthik21/base:Testing
   deploy:
     runs-on: ubuntu-latest
     needs: setup-build-run-start
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-      #Docker login:
-      - name: docker login
-        uses: dawidd6/action-ansible-playbook@v2
-        with:
-         playbook: ansible-kubernates.yml
-         directory: ansible
+      #Canister login for CD:
+      - name: Canister login
+        run: docker login --username=karthik21 --password=Dhivkk@#21 cloud.canister.io:5000
+      #Docker Image Pull:
+      - name: docker image Pull
+        run: docker pull cloud.canister.io:5000/karthik21/base:Testing
+
         
         
         
