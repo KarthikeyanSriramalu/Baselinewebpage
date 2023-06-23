@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v3
       #Docker login:
       - name: docker login
-        uses: ./
+        uses: dawidd6/action-ansible-playbook@v2
         with:
          playbook: ansible-kubernates.yml
          directory: ansible
