@@ -30,10 +30,10 @@ jobs:
     steps:
       #Docker login:
       - name: docker login
-        uses: dawidd6/action-ansible-playbook@v2
+        uses: ./
         with:
          playbook: ansible-kubernates.yml
-         directory: ./
+         directory: ansible
         
         
         
