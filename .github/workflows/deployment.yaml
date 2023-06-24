@@ -45,7 +45,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: us-east-2
-      - name: deploy using EKS cluster
+      - name: deploy using EKS cluster...
         run: |
           aws eks update-kubeconfig --name baselineweb --region us-east-2
           kubectl get svc
