@@ -57,6 +57,7 @@ jobs:
         with:
           time: '300s'
       - name: test pod's!
+        run: |
           kubectl get svc
           kubectl get pods
           kubectl describe pod baselineweb
