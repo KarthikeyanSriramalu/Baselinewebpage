@@ -51,14 +51,14 @@ jobs:
       - name: deploy using EKS cluster.
         run: |
           aws eks update-kubeconfig --name baselineweb --region us-east-2
-          kubectl apply -f k8-baselineweb.yml
+          docker pull cloud.canister.io:5000/karthik21/base:Testing          
       - name: Sleep for 300 seconds
         uses: jakejarvis/wait-action@master
         with:
           time: '300s'
       - name: test pod's!
         run: |
-          docker images
+          kubectl apply -f k8-baselineweb.yml
           kubectl get svc
           kubectl get pods
           kubectl describe pod baselineweb
