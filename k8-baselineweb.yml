@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: baselineweb
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         image: cloud.canister.io:5000/karthik21/base:Testing
         ports:
           - containerPort: 80
