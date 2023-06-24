@@ -2,16 +2,16 @@
 FROM node:latest
 
 # Working Dir
-WORKDIR /baseline
+WORKDIR /usr/src/app
 
 #Copy package Json
-COPY package.json .
+COPY package.json ./
 
 #COpy Packagelock json
-COPY package-lock.json .
+COPY package-lock.json ./
 
 #Install Node Module
-RUN npm i
+RUN npm install
 
 #Copy Source 
 COPY . . 
