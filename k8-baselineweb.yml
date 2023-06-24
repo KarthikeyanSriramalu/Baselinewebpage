@@ -2,21 +2,21 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: baselineweb-app
+  name: baselineweb
   labels:
-    app: baselineweb-app
+    app: baselineweb
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: baselineweb-app
+      app: baselineweb
   template:
     metadata:
       labels:
-        app: baselineweb-app
+        app: baselineweb
     spec:
       containers:
-      - name: baselineweb-app
+      - name: baselineweb
         imagePullPolicy: Alwayes
         image: cloud.canister.io:5000/karthik21/base:Testing
         ports:
