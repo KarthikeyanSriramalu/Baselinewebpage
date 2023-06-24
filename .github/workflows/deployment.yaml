@@ -48,12 +48,10 @@ jobs:
       - name: deploy using EKS cluster
         run: |
           aws eks update-kubeconfig --name baselineweb
-          kubectl apply -f k8-baselineweb.yml
           kubectl get svc
           kubectl get pods
-
-
-        
+          kubectl apply -f k8-baselineweb.yml
+          
         
         
   
