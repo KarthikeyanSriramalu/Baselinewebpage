@@ -75,8 +75,8 @@ jobs:
           kubectl get svc
           kubectl get pods
           kubectl describe pod baselineweb
-          kubectl logs -f event-simulator
-          
+
+
         
         
   
