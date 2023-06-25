@@ -22,7 +22,7 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: https://baseline.jfrog.io
-          username: skkarthik21@gmail.com
+          username: dhivkrish142@gmail.com
           password: Dhivkk@#21
     #canister login:
       #- name: Canister login
@@ -41,7 +41,7 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: https://baseline.jfrog.io
-          username: skkarthik21@gmail.com
+          username: dhivkrish142@gmail.com
           password: Dhivkk@#21
       #Docker Image Pull:
       - name: docker image Pull
@@ -70,7 +70,7 @@ jobs:
           time: '300s'
       - name: test pod's!
         run: |
-          kubectl create secret docker-registry regcred --docker-server=https://baseline.jfrog.io --docker-username=skkarthik21@gmail.com --docker-password=Dhivkk@#21 --docker-email=skkarthik21@gmail.com
+          kubectl create secret docker-registry regcred --docker-server=https://baseline.jfrog.io --docker-username=skkarthik21@gmail.com --docker-password=Dhivkk@#21 --docker-email=dhivkrish142@gmail.com
           kubectl apply -f k8-baselineweb.yml
           kubectl get svc
           kubectl get pods
