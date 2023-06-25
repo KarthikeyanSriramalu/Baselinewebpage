@@ -17,6 +17,13 @@ spec:
     spec:
       containers:
       - name: baselineweb
+        resources:
+          limits:
+            cpu: 1050m
+            memory: 2050Mi
+          requests:
+            cpu: 1
+            memory: 2000Mi
         imagePullPolicy: Always
         image: baseline.jfrog.io/docker/baseline:1.1.1
         ports:
