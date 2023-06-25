@@ -63,7 +63,7 @@ jobs:
       - name: deploy using EKS cluster.
         run: |
           aws eks update-kubeconfig --name baselineweb --region us-east-2
-          docker pull cloud.canister.io:5000/karthik21/base:Testing          
+          # docker pull cloud.canister.io:5000/karthik21/base:Testing          
       - name: Sleep for 300 seconds
         uses: jakejarvis/wait-action@master
         with:
