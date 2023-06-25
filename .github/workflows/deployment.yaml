@@ -65,7 +65,6 @@ jobs:
           aws eks update-kubeconfig --name baselineweb --region us-east-2
           # docker pull cloud.canister.io:5000/karthik21/base:Testing  
           # kubectl create secret docker-registry basesec --docker-server=https://baseline.jfrog.io --docker-username=skkarthik21@gmail.com --docker-password=Dhivkk@#21 --docker-email=dhivkrish142@gmail.com
-          kubectl get pods -n kube-system | grep "vpc-admission"
           kubectl apply -f k8-baselineweb.yml
       - name: Sleep for 300 seconds
         uses: jakejarvis/wait-action@master
