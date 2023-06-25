@@ -18,8 +18,8 @@ spec:
       containers:
       - name: baselineweb
         imagePullPolicy: Always
-        image: cloud.canister.io:5000/karthik21/base:Testing
+        image: baseline.jfrog.io/docker/baseline:1.1.1
         ports:
           - containerPort: 80
-      # imagePullSecrets:
-      # - name: regcred
+        imagePullSecrets:
+         - name: regcred
