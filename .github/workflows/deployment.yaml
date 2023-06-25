@@ -70,7 +70,7 @@ jobs:
           time: '300s'
       - name: test pod's!
         run: |
-          kubectl create secret docker-registry regcred --docker-server=https://baseline.jfrog.io --docker-username=skkarthik21@gmail.com --docker-password=Dhivkk@#21 --docker-email=dhivkrish142@gmail.com
+          kubectl create secret docker-registry basesec --docker-server=https://baseline.jfrog.io --docker-username=skkarthik21@gmail.com --docker-password=Dhivkk@#21 --docker-email=dhivkrish142@gmail.com
           kubectl apply -f k8-baselineweb.yml
           kubectl get svc
           kubectl get pods
