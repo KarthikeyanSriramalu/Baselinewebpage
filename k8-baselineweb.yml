@@ -27,6 +27,20 @@ spec:
         imagePullPolicy: Always
         image: baseline.jfrog.io/docker/baseline:1.1.1
         ports:
-          - containerPort: 80
+          - containerPort: 3000
       imagePullSecrets:
       - name: basesec
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: baselineweb
+  namespace: default
+spec:
+  selector:
+    app: baselineweb
+  type: LoadBalancer
+  ports:
+  - name: http
+    targetPort: 3000
+    port: 80
