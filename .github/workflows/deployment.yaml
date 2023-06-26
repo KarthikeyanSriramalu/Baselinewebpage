@@ -3,7 +3,7 @@ on:
   branches:
    - master
 
-# Jobs needs to part
+# Jobs needs to part..
 jobs:
   setup-build-run-start:
     name: basewebpage
@@ -69,7 +69,7 @@ jobs:
       - name: Sleep for 300 seconds
         uses: jakejarvis/wait-action@master
         with:
-          time: '300s'
+          time: '180s'
       - name: test pod's!
         run: |
           kubectl get svc
