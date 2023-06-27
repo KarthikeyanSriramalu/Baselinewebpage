@@ -31,19 +31,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: setup-build-run-start
     steps:
-      #Canister login for CD:
-      #- name: Canister login
-      #  run: docker login --username=karthik21 --password=Dhivkk@#21 cloud.canister.io:5000
-      - name: Login to JFrog Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: https://baseline.jfrog.io
-          username: dhivkrish142@gmail.com
-          password: Dhivkk@#21
-      #Docker Image Pull:
-      - name: docker image Pull
-        run: docker pull baseline.jfrog.io/docker/baseline:1.1.1
-      #Install Kubectl
+    #Checkout
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+     #Install Kubectl
       - name: install kubernates
         uses: azure/setup-kubectl@v2.0
         with: 
@@ -53,14 +44,19 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
-          aws-region: us-east-2
-      #Checkout
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+          aws-region: us-east-2      
+      - name: Login to JFrog Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: https://baseline.jfrog.io
+          username: dhivkrish142@gmail.com
+          password: Dhivkk@#21
+      #Docker Image Pull:
+      - name: docker image Pull
+        run: docker pull baseline.jfrog.io/docker/baseline:1.1.1
       - name: deploy using EKS cluster.
         run: |
-          aws eks update-kubeconfig --name baselinewebDevOps --region us-east-2
-          # docker pull cloud.canister.io:5000/karthik21/base:Testing  
+          aws eks update-kubeconfig --name baselinewebDevOps --region us-east-2          
           # kubectl create secret docker-registry basesec --docker-server=https://baseline.jfrog.io --docker-username=skkarthik21@gmail.com --docker-password=Dhivkk@#21 --docker-email=dhivkrish142@gmail.com
           kubectl apply -f k8-baselineweb.yml
       - name: Sleep for 300 seconds
