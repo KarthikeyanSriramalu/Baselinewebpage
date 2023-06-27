@@ -38,7 +38,7 @@ jobs:
       - name: install kubernates
         uses: azure/setup-kubectl@v2.0
         with: 
-          version: 'v1.27.0'
+          version: 'v1.24.0'
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -56,7 +56,7 @@ jobs:
         run: docker pull baseline.jfrog.io/docker/baseline:1.1.1
       - name: deploy using EKS cluster.
         run: |
-          aws eks update-kubeconfig --name baselinewebDevOps --region us-east-2          
+          aws eks update-kubeconfig --name baselinewebDev --region us-east-2          
           # kubectl create secret docker-registry basesec --docker-server=https://baseline.jfrog.io --docker-username=skkarthik21@gmail.com --docker-password=Dhivkk@#21 --docker-email=dhivkrish142@gmail.com
           kubectl apply -f k8-baselineweb.yml
       - name: Sleep for 300 seconds
