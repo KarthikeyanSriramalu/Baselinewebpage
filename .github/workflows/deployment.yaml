@@ -24,9 +24,6 @@ jobs:
           registry: https://baseline.jfrog.io
           username: dhivkrish142@gmail.com
           password: Dhivkk@#21
-    #canister login:
-      #- name: Canister login
-      #  run: docker login --username=karthik21 --password=Dhivkk@#21 cloud.canister.io:5000
     #Docker Push:
       - name: docker image Push
         run: docker push baseline.jfrog.io/docker/baseline:1.1.1
