@@ -16,6 +16,8 @@ RUN npm install
 #Copy Source 
 COPY . . 
 
+EXPOSE 3000
+
 #EntryPoint
 CMD ["npm", "run", "start"]
 
