@@ -67,7 +67,7 @@ jobs:
         run: |
           kubectl get svc
           kubectl get pods
-          kubectl describe pod baselineweb
+          kubectl describe pod new-eks-cluster
 
 
         
