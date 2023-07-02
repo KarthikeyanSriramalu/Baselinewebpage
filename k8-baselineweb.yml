@@ -2,16 +2,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: github-actions-gke
+  name: baselineweb
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: github-actions-gke
+      app: baselineweb
   template:
     metadata:
       labels:
-        app: github-actions-gke
+        app: baselineweb
     spec:
       containers:
         - name: app
@@ -21,10 +21,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: github-actions-gke
+  name: baselineweb
 spec:
   selector:
-    app: github-actions-gke
+    app: baselineweb
   type: LoadBalancer
   ports:
     - port: 80
