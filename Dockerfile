@@ -16,7 +16,7 @@ RUN npm install
 #Copy Source 
 COPY . . 
 
-EXPOSE 3000
+EXPOSE 8080
 
 #EntryPoint
 CMD ["npm", "run", "start"]
