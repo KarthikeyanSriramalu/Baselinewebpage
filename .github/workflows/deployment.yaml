@@ -77,4 +77,5 @@ jobs:
         run: |-
           kubectl apply -f k8-baselineweb.yml
           kubectl rollout status deployment/$DEPLOYMENT_NAME
+          kubectl get pods
           kubectl get services -o wide
