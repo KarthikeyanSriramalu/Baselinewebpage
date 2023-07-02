@@ -3,6 +3,14 @@ on:
   branches:
    - master
 
+env:
+  PROJECT_ID: ${{secrets.GKE_KS_PROJECTID}}
+  GKE_CLUSTER: gke-github-actions
+  GKE_ZONE: us-east4
+  DEPLOYMENT_NAME: github-actions-gke
+  IMAGE: github-actions-gke-image
+  TAG: 1.0.0
+
 # Jobs needs to part..
 jobs:
   setup-build-run-start:
@@ -13,20 +21,23 @@ jobs:
     #Checkout
       - name: Checkout Repository
         uses: actions/checkout@v3
-    #Build Docker:
-      - name: docker build
-        run: |
-          docker build -t baseline.jfrog.io/docker/baseline:1.1.1 .
-          docker images
-      - name: Login to JFrog Container Registry
-        uses: docker/login-action@v1
+    # GCP CLI
+      - name: Setup Google Cloud CLI
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@0.1.3
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
-          registry: https://baseline.jfrog.io
-          username: dhivkrish142@gmail.com
-          password: Dhivkk@#21
-    #Docker Push:
-      - name: docker image Push
-        run: docker push baseline.jfrog.io/docker/baseline:1.1.1
+          service_account_key: ${{secrets.GKE_KS_KEY}}
+          project_id: ${{secrets.GKE_KS_PROJECTID}}
+      - name: Configure Docker
+        run: |-
+          gcloud --quiet auth configure-docker
+      - name: Build Docker Image
+        run: |-
+          docker build --tag "gcr.io/github-actions-gke-385618/baseline:1.1.0" .
+      - name: Publish Docker Image to GCR
+        run: |-
+          docker push "gcr.io/github-actions-gke-385618/baseline:1.1.0"
   deploy:
     runs-on: ubuntu-latest
     needs: setup-build-run-start
@@ -34,42 +45,36 @@ jobs:
     #Checkout
       - name: Checkout Repository
         uses: actions/checkout@v3
-     #Install Kubectl
-      - name: install kubernates
-        uses: azure/setup-kubectl@v2.0
-        with: 
-          version: 'v1.25.0'
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+      - name: Setup Google Cloud CLI
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@0.1.3
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
-          aws-region: us-east-2      
-      - name: Login to JFrog Container Registry
-        uses: docker/login-action@v1
+          service_account_key: ${{secrets.GKE_KS_KEY}}
+          project_id: ${{secrets.GKE_KS_PROJECTID}}
+      - name: "Auth to GCP exist env"
+        uses: google-github-actions/auth@v0
         with:
-          registry: https://baseline.jfrog.io
-          username: dhivkrish142@gmail.com
-          password: Dhivkk@#21
-      #Docker Image Pull:
-      - name: docker image Pull
-        run: docker pull baseline.jfrog.io/docker/baseline:1.1.1
-      - name: deploy using EKS cluster.
-        run: |
-          aws eks update-kubeconfig --name baselineweb --region us-east-2          
-          # kubectl create secret docker-registry basesec --docker-server=https://baseline.jfrog.io --docker-username=skkarthik21@gmail.com --docker-password=Dhivkk@#21 --docker-email=dhivkrish142@gmail.com
+          credentials_json: ${{secrets.GKE_KS_KEY}}
+      - name: "Set up Cloud SDK"
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          install_components: 'gke-gcloud-auth-plugin'
+      - name: "Connect to cluster"
+        uses: google-github-actions/get-gke-credentials@v0
+        with:
+          cluster_name: gke-github-actions
+          location: us-east4
+          project_id: ${{secrets.GKE_KS_PROJECTID}}
+          use_auth_provider: true
+      - name: Configure Docker
+        run: |-
+          gcloud --quiet auth configure-docker
+      - name: Get GKE Credentials
+        run: |-
+          gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+      - name: Deploy Image to GKE cluster
+        run: |-
           kubectl apply -f k8-baselineweb.yml
-      - name: Sleep for 300 seconds
-        uses: jakejarvis/wait-action@master
-        with:
-          time: '180s'
-      - name: test pod's!
-        run: |
-          kubectl get svc
-          kubectl get pods
-          kubectl describe pod baselineweb
-
-
-        
-        
-  
+          kubectl rollout status deployment/$DEPLOYMENT_NAME
+          kubectl get services -o wide
