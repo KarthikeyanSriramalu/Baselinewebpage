@@ -11,7 +11,7 @@ env:
   IMAGE: github-actions-gke-image
   TAG: 1.0.0
 
-# Jobs needs to part..
+# Jobs needs to part
 jobs:
   setup-build-run-start:
     name: basewebpage
