@@ -15,8 +15,10 @@ spec:
     spec:
       containers:
         - name: app
-          image: gcr.io/github-actions-gke-385618/test2:1.1.0
+          image: baseline.jfrog.io/docker/baseline:1.1.1
           imagePullPolicy: Always
+      imagePullSecrets: 
+      - name: basesec      
 ---
 apiVersion: v1
 kind: Service
