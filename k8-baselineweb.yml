@@ -18,7 +18,7 @@ spec:
           image: baseline.jfrog.io/docker/baseline:1.1.1
           imagePullPolicy: Always
       imagePullSecrets: 
-      - name: basesec      
+      - name: baseseceks      
 ---
 apiVersion: v1
 kind: Service
