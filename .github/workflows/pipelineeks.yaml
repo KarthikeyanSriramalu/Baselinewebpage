@@ -57,7 +57,7 @@ jobs:
       - name: deploy using EKS cluster.
         run: |
           aws eks update-kubeconfig --name gokul-test --region us-east-1          
-          kubectl create secret docker-registry basesec --docker-server=https://baseline.jfrog.io --docker-username=skkarthik21@gmail.com --docker-password=Dhivkk@#21 --docker-email=dhivkrish142@gmail.com
+          kubectl create secret docker-registry baseseceks --docker-server=https://baseline.jfrog.io --docker-username=dhivkrish142@gmail.com --docker-password=Dhivkk@#21 --docker-email=dhivkrish142@gmail.com
           kubectl apply -f k8-baselineweb.yml
       - name: Sleep for 300 seconds
         uses: jakejarvis/wait-action@master
