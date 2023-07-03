@@ -45,24 +45,11 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: us-east-1
-      - name: Login to JFrog Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: https://baseline.jfrog.io
-          username: dhivkrish142@gmail.com
-          password: Dhivkk@#21
-      #Docker Image Pull:
-      - name: docker image Pull
-        run: docker pull baseline.jfrog.io/docker/baseline:1.1.1
       - name: deploy using EKS cluster.
         run: |
           aws eks update-kubeconfig --name gokul-test --region us-east-1          
-          kubectl create secret docker-registry baseseceks --docker-server=https://baseline.jfrog.io --docker-username=dhivkrish142@gmail.com --docker-password=Dhivkk@#21 --docker-email=dhivkrish142@gmail.com
+          # kubectl create secret docker-registry baseseceks --docker-server=https://baseline.jfrog.io --docker-username=dhivkrish142@gmail.com --docker-password=Dhivkk@#21 --docker-email=dhivkrish142@gmail.com
           kubectl apply -f k8-baselineweb.yml
-      - name: Sleep for 300 seconds
-        uses: jakejarvis/wait-action@master
-        with:
-          time: '180s'
       - name: test pod's!
         run: |
           kubectl get svc
