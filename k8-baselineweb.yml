@@ -15,10 +15,10 @@ spec:
     spec:
       containers:
         - name: app
-          image: baseline.jfrog.io/docker/baseline:1.1.1
+          image: dhivkk/eksdocker:baseline
           imagePullPolicy: Always
-      imagePullSecrets: 
-      - name: baseseceks      
+      #imagePullSecrets: 
+      #- name: baseseceks      
 ---
 apiVersion: v1
 kind: Service
